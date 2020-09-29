@@ -1,14 +1,25 @@
 # [START gae_python38_app]
 
-from flask import Flask
+from flask import Flask, render_template, request
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder=".")
 
 
-@app.route("/")
+@app.route("/api/hello")
 def hello_world():
     print("hello")
     return "Hello, World :)"
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    # note that we set the 404 status explicitly
+    return render_template("static/404.html"), 404
+
+
+@app.route("/api/gis", methods=["POST"])
+def process_coordinates():
+    return request.json
 
 
 if __name__ == "__main__":
