@@ -9,6 +9,7 @@ black = "*"
 
 [packages]
 flask = "*"
+rasterio = "*"
 
 [requires]
 python_version = "3.8"

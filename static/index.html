@@ -49,6 +49,10 @@
             padding: 3rem 1.5rem;
             text-align: center;
         }
+
+        .result {
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -89,6 +93,10 @@
             </div>
         </form>
 
+        <div class="row starter-template" id="resultDisplay" style="display: none">
+            <p id="resultText" class="lead col"> Hello</p>
+        </div>
+
 
     </main><!-- /.container -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
@@ -106,6 +114,16 @@
         function initAutocomplete() {
             autocomplete = new google.maps.places.Autocomplete(document.getElementById("searchBar"));
         }
+        function handleResponse(result) {
+            console.log(result);
+            let searchBar = document.getElementById("searchBar");
+            searchBar.value = "";
+            let resultText = document.getElementById("resultText");
+            resultText.innerText = result;
+            let resultDisplay = document.getElementById("resultDisplay");
+            resultDisplay.style = "display: default";
+
+        }
         function postCoordinates() {
             let lat = autocomplete.getPlace().geometry.location.lat();
             let lng = autocomplete.getPlace().geometry.location.lng();
@@ -113,9 +131,7 @@
                 type: "POST",
                 url: '/api/gis',
                 data: JSON.stringify({ "lat": lat, "lng": lng }),
-                success: function (result) {
-                    console.log(result);
-                },
+                success: handleResponse,
                 contentType: "application/json; charset=utf-8",
                 dataType: "json"
             });
