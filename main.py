@@ -34,7 +34,7 @@ def process_coordinates():
         or lng > map_bounds.right
         or lng < map_bounds.left
     ):
-        return 400
+        return jsonify({"status": "Not Found"})
 
     pixels = dataset.index(lng, lat)
     rgb = [dataset.read(x)[pixels] for x in range(1, 4)]
@@ -58,7 +58,9 @@ def process_coordinates():
         ]
 
         if False not in results:
-            return jsonify(k)
+            return jsonify({"status": "OK", "data": k})
+
+    return jsonify({"status": "Not Found"})
 
 
 if __name__ == "__main__":

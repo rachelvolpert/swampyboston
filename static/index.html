@@ -116,13 +116,20 @@
         }
         function handleResponse(result) {
             console.log(result);
+            // clear searchbar
             let searchBar = document.getElementById("searchBar");
             searchBar.value = "";
+            // display result
             let resultText = document.getElementById("resultText");
-            resultText.innerText = result;
             let resultDisplay = document.getElementById("resultDisplay");
-            resultDisplay.style = "display: default";
-
+            if (result.status === "OK") {
+                resultText.innerText = result.data;
+                resultDisplay.style = "display: default";
+            }
+            else {
+                resultText.innerText = "Address not found on map";
+                resultDisplay.style = "display: default";
+            }
         }
         function postCoordinates() {
             let lat = autocomplete.getPlace().geometry.location.lat();
