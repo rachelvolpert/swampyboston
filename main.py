@@ -1,7 +1,9 @@
 # [START gae_python38_app]
 
 from flask import Flask, render_template, request, jsonify
-import rasterio
+from affine import Affine
+import math
+import zarr
 
 app = Flask(__name__, template_folder=".")
 
@@ -18,7 +20,19 @@ def page_not_found(e):
     return render_template("static/404.html"), 404
 
 
-dataset = rasterio.open("commonwealth_q524n561v_georectifiedMaster.tif")
+dataset = zarr.open('data/dataset.zarr')
+
+# Hard-code the transformation and bounds to increase speed
+inverse_transformation = Affine(62174.537385176256, 0.0, 4420592.416608675,
+                                0.0, -62174.537385176256, 2636156.5724939094)
+
+
+DATASET_BOUNDS = {
+    "left": -71.09972349649745,
+    "right": -70.97668277401313,
+    "top": 42.39929532829022,
+    "bottom": 42.25259540282886
+}
 
 
 @app.route("/api/gis", methods=["POST"])
@@ -26,18 +40,17 @@ def process_coordinates():
     lat = request.json["lat"]
     lng = request.json["lng"]
 
-    map_bounds = dataset.bounds
-
     if (
-        lat < map_bounds.bottom
-        or lat > map_bounds.top
-        or lng > map_bounds.right
-        or lng < map_bounds.left
+        lat < DATASET_BOUNDS["bottom"]
+        or lat > DATASET_BOUNDS["top"]
+        or lng > DATASET_BOUNDS["right"]
+        or lng < DATASET_BOUNDS["left"]
     ):
         return jsonify({"status": "Not Found"})
 
-    pixels = dataset.index(lng, lat)
-    rgb = [dataset.read(x)[pixels] for x in range(1, 4)]
+    x, y = inverse_transformation * (lng, lat)
+    pixel_x, pixel_y = (math.floor(x), math.floor(y))
+    rgb = dataset[0:3, pixel_x, pixel_y]
 
     map_legend = {
         "original_land_1630": [0, 55, 46],
@@ -53,9 +66,9 @@ def process_coordinates():
     }
 
     for k, v in map_legend.items():
-        results = [
-            True if rgb[a] - 5 <= v[a] <= rgb[a] + 5 else False for a in range(3)
-        ]
+        results = (
+            (rgb[a] - 5 <= v[a] <= rgb[a] + 5) for a in range(3)
+        )
 
         if False not in results:
             return jsonify({"status": "OK", "data": k})
