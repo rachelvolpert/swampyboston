@@ -81,14 +81,14 @@
         </div>
 
 
-        <form>
+        <form id="address_form">
             <div class="form-row">
                 <div class="col-md-5 offset-md-3">
                     <input id="searchBar" class="form-control" type="text" placeholder="Enter a Boston address"
                         aria-label="Enter a Boston address" autofocus>
                 </div>
                 <div class="col">
-                    <button onclick="postCoordinates()" class="btn btn-secondary" type="submit">Search</button>
+                    <button class="btn btn-secondary" type="submit">Search</button>
                 </div>
             </div>
         </form>
@@ -134,15 +134,21 @@
         function postCoordinates() {
             let lat = autocomplete.getPlace().geometry.location.lat();
             let lng = autocomplete.getPlace().geometry.location.lng();
-            $.ajax({
+            return $.ajax({
                 type: "POST",
                 url: '/api/gis',
                 data: JSON.stringify({ "lat": lat, "lng": lng }),
-                success: handleResponse,
                 contentType: "application/json; charset=utf-8",
                 dataType: "json"
             });
         }
+        $(document).ready(function() {
+            $("#address_form").submit(function() {
+                const coordPromise = postCoordinates();
+                coordPromise.then(handleResponse);
+                return false;
+            });
+        });
     </script>
 
 </body>
