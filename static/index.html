@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Boston swamps">
     <meta name="author" content="Rachel Volpert & Spencer Pozder">
-    <title>Starter Template · Bootstrap</title>
+    <title>SwampyBoston</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/starter-template/">
 
@@ -46,7 +46,7 @@
         }
 
         .starter-template {
-            padding: 3rem 1.5rem;
+            padding: 1rem 1.5rem;
             text-align: center;
         }
 
@@ -58,7 +58,7 @@
 
 <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top">
-        <a class="navbar-brand" href="#">Swampy Boston</a>
+        <a class="navbar-brand" href="index.html">Swampy Boston</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
             aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -66,9 +66,12 @@
 
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
-                <!-- <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                </li> -->
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://github.com/rachelvolpert/swampyboston" target="_blank">Repo</a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -123,7 +126,7 @@
             let resultText = document.getElementById("resultText");
             let resultDisplay = document.getElementById("resultDisplay");
             if (result.status === "OK") {
-                resultText.innerText = result.data;
+                resultText.innerHTML = result.folium_map;
                 resultDisplay.style = "display: default";
             }
             else {
@@ -142,8 +145,8 @@
                 dataType: "json"
             });
         }
-        $(document).ready(function() {
-            $("#address_form").submit(function() {
+        $(document).ready(function () {
+            $("#address_form").submit(function () {
                 const coordPromise = postCoordinates();
                 coordPromise.then(handleResponse);
                 return false;

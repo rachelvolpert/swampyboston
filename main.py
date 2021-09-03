@@ -2,6 +2,7 @@
 
 from flask import Flask, render_template, request, jsonify
 from affine import Affine
+import folium
 import math
 import zarr
 
@@ -20,18 +21,24 @@ def page_not_found(e):
     return render_template("static/404.html"), 404
 
 
-dataset = zarr.open('data/dataset.zarr')
+dataset = zarr.open("data/dataset.zarr")
 
 # Hard-code the transformation and bounds to increase speed
-inverse_transformation = Affine(62174.537385176256, 0.0, 4420592.416608675,
-                                0.0, -62174.537385176256, 2636156.5724939094)
+inverse_transformation = Affine(
+    62174.537385176256,
+    0.0,
+    4420592.416608675,
+    0.0,
+    -62174.537385176256,
+    2636156.5724939094,
+)
 
 
 DATASET_BOUNDS = {
     "left": -71.09972349649745,
     "right": -70.97668277401313,
     "top": 42.39929532829022,
-    "bottom": 42.25259540282886
+    "bottom": 42.25259540282886,
 }
 
 
@@ -66,12 +73,38 @@ def process_coordinates():
     }
 
     for k, v in map_legend.items():
-        results = (
-            (rgb[a] - 5 <= v[a] <= rgb[a] + 5) for a in range(3)
-        )
+        results = ((rgb[a] - 5 <= v[a] <= rgb[a] + 5) for a in range(3))
 
         if False not in results:
-            return jsonify({"status": "OK", "data": k})
+            folium_map = folium.Map(
+                location=(lat, lng),
+                zoom_start=14,
+                max_zoom=16,
+                min_zoom=12,
+                width="70%",
+                height="70%",
+                left="15%",
+            )
+            folium.Marker([lat, lng], popup=k).add_to(folium_map)
+
+            folium.raster_layers.ImageOverlay(
+                image="static/layers/{}_warped.png".format(k),
+                name=k,
+                bounds=[
+                    [42.28165548654934, -71.100524097098],
+                    [42.398047612900534, -70.98068762905207],
+                ],
+                opacity=0.75,
+                interactive=False,
+                cross_origin=False,
+                zindex=1,
+            ).add_to(folium_map)
+
+            folium.LayerControl().add_to(folium_map)
+
+            return jsonify(
+                {"status": "OK", "data": k, "folium_map": folium_map._repr_html_()}
+            )
 
     return jsonify({"status": "Not Found"})
 

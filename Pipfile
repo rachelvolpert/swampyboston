@@ -11,6 +11,7 @@ black = "*"
 flask = "*"
 affine = "*"
 zarr = "*"
+folium = "*"
 
 [requires]
 python_version = "3.8"
