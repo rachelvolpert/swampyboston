@@ -142,3 +142,6 @@ dmypy.json
 
 # Pipenv
 requirements.txt
+
+# Mac
+*.DS_Store

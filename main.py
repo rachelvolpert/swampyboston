@@ -21,24 +21,23 @@ def page_not_found(e):
     return render_template("static/404.html"), 404
 
 
-dataset = zarr.open("data/dataset.zarr")
+dataset = zarr.open("data/9531.zarr")
 
 # Hard-code the transformation and bounds to increase speed
 inverse_transformation = Affine(
-    62174.537385176256,
-    0.0,
-    4420592.416608675,
-    0.0,
-    -62174.537385176256,
-    2636156.5724939094,
+    5.07561203e04,
+    -4.09210340e02,
+    3.62607698e06,
+    -3.19991057e02,
+    -6.84942403e04,
+    2.88127419e06,
 )
 
-
 DATASET_BOUNDS = {
-    "left": -71.09972349649745,
-    "right": -70.97668277401313,
-    "top": 42.39929532829022,
-    "bottom": 42.25259540282886,
+    "left": -71.099903,
+    "right": -70.981345,
+    "top": 42.397086,
+    "bottom": 42.282287,
 }
 
 
@@ -46,6 +45,7 @@ DATASET_BOUNDS = {
 def process_coordinates():
     lat = request.json["lat"]
     lng = request.json["lng"]
+    print(lng, lat)
 
     if (
         lat < DATASET_BOUNDS["bottom"]
@@ -57,7 +57,8 @@ def process_coordinates():
 
     x, y = inverse_transformation * (lng, lat)
     pixel_x, pixel_y = (math.floor(x), math.floor(y))
-    rgb = dataset[0:3, pixel_x, pixel_y]
+    print(pixel_x, pixel_y)
+    rgb = dataset[pixel_y, pixel_x][0:3]
 
     map_legend = {
         "original_land_1630": [0, 55, 46],
@@ -71,6 +72,8 @@ def process_coordinates():
         "water": [152, 197, 215],
         "shoreline_no_changes": [215, 215, 215],
     }
+
+    print(rgb)
 
     for k, v in map_legend.items():
         results = ((rgb[a] - 5 <= v[a] <= rgb[a] + 5) for a in range(3))
