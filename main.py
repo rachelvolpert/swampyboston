@@ -84,9 +84,8 @@ def process_coordinates():
                 zoom_start=14,
                 max_zoom=16,
                 min_zoom=12,
-                width="70%",
-                height="70%",
-                left="15%",
+                width="100%",
+                height="100%",
             )
             folium.Marker([lat, lng], popup=k).add_to(folium_map)
 
