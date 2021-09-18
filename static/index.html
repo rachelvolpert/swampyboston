@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Boston swamps">
     <meta name="author" content="Rachel Volpert & Spencer Pozder">
-    <title>Starter Template · Bootstrap</title>
+    <title>SwampyBoston</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/starter-template/">
 
@@ -15,13 +15,7 @@
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
     <!-- Favicons -->
-    <!-- <link rel="apple-touch-icon" href="/docs/4.5/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-    <link rel="icon" href="/docs/4.5/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-    <link rel="icon" href="/docs/4.5/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-    <link rel="mask-icon" href="/docs/4.5/assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
-    <link rel="icon" href="/docs/4.5/assets/img/favicons/favicon.ico">
-    <meta name="msapplication-config" content="/docs/4.5/assets/img/favicons/browserconfig.xml">
-    <meta name="theme-color" content="#563d7c"> -->
+    <link rel="icon" type="image/png" href="/static/favicon.png" />
     <link rel="manifest" href="/static/manifest.json">
 
 
@@ -46,19 +40,27 @@
         }
 
         .starter-template {
-            padding: 3rem 1.5rem;
+            padding: 1rem 1.5rem;
             text-align: center;
+
         }
 
         .result {
             text-align: center;
         }
+
+        .result_description {
+            width: 70%;
+            margin-left: 15%;
+        }
     </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top">
-        <a class="navbar-brand" href="#">Swampy Boston</a>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="index.html">
+            <img src="/static/logo.png" alt="logo" style="margin-right: 1%" />
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
             aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -66,9 +68,12 @@
 
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
-                <!-- <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                </li> -->
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://github.com/rachelvolpert/swampyboston" target="_blank">Repo</a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -93,8 +98,166 @@
             </div>
         </form>
 
-        <div class="row starter-template" id="resultDisplay" style="display: none">
-            <p id="resultText" class="lead col"> Hello</p>
+        <div class="row starter-template" id="resultDisplay" style="display: none; width: 70%; margin-left: 15%">
+            <div id="resultText" class="lead col"></div>
+        </div>
+
+        <div class="row starter-template result_description" id="original_land_1630_div" style="display: none;">
+            <h5>This address is located on the original land that existed in Boston when it was founded in 1630.
+            </h5>
+            <p id="added_1630_txt" class="lead col" style="text-align: left;">
+                The native people residing in what is now downtown Boston referred to this land area as Shawmut.
+                During
+                this time, Shawmut was an 800 acre peninsula that was connected to the mainland by a narrow strip of
+                land called “The Neck”. Shawmut Peninsula had three large hills (that have since been flattened) and
+                were called “Trimount”, a precursor to the name for Tremont street.
+            </p>
+        </div>
+
+        <div class="row starter-template result_description" id="added_1795_div" style="display: none;">
+            <h5>This address is on land that was filled in between 1630 and 1796.</h5>
+            <p id="added_1795_txt" class="lead col" style="text-align: left;">
+                By 1795, your address was no longer swamp. During this period, Boston was coming into its own as a
+                shipping center, so more land around the harbor was filled in to create docks and bridges.
+                <br><br>
+                When the English first landed in what is now Boston, the area around the future North Station was
+                just a
+                large, marshy cove called Mill Pond. Sometime after 1643, the cove’s ownership changed, and a large
+                dam
+                was built, allowing the entire cove to eventually be filled in. Later, the West Boston Bridge was
+                build
+                to connect the peninsula to Cambridge, in the same location as the current day Longfellow Bridge. In
+                1785, a similar bridge was built to connect Boston to Charlestown. By 1795, Boston was growing to be
+                more interconnected, allowing quick access to neighboring towns.
+            </p>
+        </div>
+
+        <div class="row starter-template result_description" id="added_1852_div" style="display: none;">
+            <h5> This address is on land that was filled in between 1795 and 1852.</h5>
+            <p id="added_1852_txt" class="lead col" style="text-align: left;">
+                By 1852, many areas of the greater Boston area were filled in. The prevailing medical theory at the
+                time was miasmatic theory of disease, which posited that disease was caused by foul odors. This
+                proved
+                to be a reason for filling in swampy areas of Boston that had started to smell wretchedly.
+                <br><br>
+                In 1807, due to public health concern over the stench of Mill Pond, the filling in of the pond
+                began.
+                Mill Pond was located in what is now known as the West End. The material for this came from Beacon
+                Hill,
+                resulting in Beacon Hill becoming 60 feet lower than it was before the city started tearing up the
+                land
+                to use for filling in. This land became an industrial area and land was eventually extended outwards
+                even more to make room for railroad depots.
+                <br><br>
+                South Cove (current day Chinatown) and Great Cove (current day Financial District) started to be
+                filled
+                in 1806 and continued into the 1840s.
+                <br><br>
+                Back Bay is another area that is the result fo extensive filling in. In 1822, a dam was constructed
+                in
+                the Back Bay area in order to power mills. This stopped the flow of water and caused areas of land
+                to
+                start appearing soon after, including what is now the Boston Public Garden and the area south of the
+                garden called Bay Village. The area was described as “bubbling like a cauldron with the noxious
+                gases
+                that are exploding from the corrupting mass below” and residents pushed to get this area filled in.
+                Once
+                again, the stench of sewage became the cause for filling in an area of Boston. By 1850, the landfill
+                of
+                Back Bay was approved.
+            </p>
+        </div>
+
+        <div class="row starter-template result_description" id="added_1880_div" style="display: none;">
+            <h5>This address is on land that was filled in between 1852 and 1880.</h5>
+            <p id="added_1880_txt" class="lead col" style="text-align: left;">
+                By 1880, the area currently known as
+                Back Bay was almost fully filled in, with the exception of the
+                Esplanade. The filling of Back Bay started in 1857 and was completed in 1882. The act of filling in
+                Back
+                Bay nearly doubled the size of the Boston peninsula. The land was filled in using gravel imported
+                from
+                Needham, rubble from the Great Fire of 1872, mud and trash.
+                <br><br>
+                The filling of Charlestown occurred between 1860 and 1896, turning the land from a peninsula into
+                mostly
+                connected to the mainland of Everett.
+                <br><br>
+                Part of downtown Boston and the South Bay Area started to be filled in during the 1850’s.
+            </p>
+        </div>
+
+        <div class="row starter-template result_description" id="added_1916_div" style="display: none;">
+            <h5>This address is on land that was filled in between 1880 and 1916.</h5>
+            <p id="added_1916_txt" class="lead col" style="text-align: left;">
+                By 1890, the Charles River landfill reached Kenmore Square, which used to be the west end of the
+                Back
+                Bay Milll pond.
+                <br><br>
+                The filling of the Back Bay Fens was complete in 1900. This area had been a tidal flat of the
+                Charles
+                River but was filled in after becoming malodorous from sewage from nearby settlements. The famous
+                landscape architect Fredrick Law Olmsted worked on turning the Fens area from a smelly swamp into a
+                hygienic park with some of the marsh preserved for ecological purposes. He designed the area to be
+                fleshed by the tides twice a day, but in 1910 a dam was built to close the area to ocean tides and
+                form
+                a freshwater lagoon where storm water from the Charles River Basin flowed into.
+                <br><br>
+                By the late 19th century, the salt marshes of East Cambridge were filled in, allowing East Cambridge
+                to
+                join with Old Cambridge and Cambridgeport. Evidence that East Cambridge sits atop filled land can be
+                seen in the street patterns of the area. The street grid of this area (south of Charles Street and
+                west
+                of Sixth Street) is far more open than the original land above it.
+                <br><br>
+                In 1916, the MIT campus was moved from Boston to its current location in Cambridge because of the
+                allure
+                of greater land area. The new campus was located on a mile long tract of filled land on the
+                Cambridge
+                side of the Charles River.
+            </p>
+        </div>
+
+        <div class="row starter-template result_description" id="added_1934_div" style="display: none;">
+            <h5>This address is on land that was filled in between 1916 and 1934.</h5>
+            <p id="added_1934_txt" class="lead col" style="text-align: left;">
+                In 1929, the first flight took off
+                from Boston Logan Airport, which was built on an area of filled in
+                land in East Boston.
+                <br><br>
+                The filling in of the Columbus Park/Andrew Square was completed by 1934.
+            </p>
+        </div>
+
+        <div class="row starter-template result_description" id="added_1950_div" style="display: none;">
+            <h5>This address is on land that was filled in between 1934 and 1950.</h5>
+            <p id="added_1950_txt" class="lead col" style="text-align: left;">
+                During the 40s and 50s, the rise in air travel led to the area around Boston Logan Airport to be
+                expanded via landfilling. The land was taken from Governers, Noddle’s and Apple islands. Due to this
+                process, these islands no longer exist. This allowed Logan Airport to add 2 terminals in 1949.
+                <br><br>
+                By 1950, much of the Belle Isle marsh was filled in - leaving the Belle Isle Marsh Reservation as
+                the
+                last remnant within Boston of the salt marshes that were once prevalent along the Massachusetts Bay
+                Shoreline. Much of this reclaimed land is now Orient Heights, a largely Italian and increasingly
+                South
+                American neighborhood.
+            </p>
+        </div>
+
+        <div class="row starter-template result_description" id="added_1995_div" style="display: none;">
+            <h5>This address is on land that was filled in between 1950 and 1995.</h5>
+            <p id="added_1995_txt" class="lead col" style="text-align: left;">
+                Between 1950 and 1995, many finishing touches were made to Boston’s shoreline that are
+                transportation
+                and recreation staples for Bostonians to this day. These include the final additions to the
+                Esplanade
+                park, the construction of the Evelyn Moakley Bridge connecting Downtown Boston to Seaport, and large
+                additions to Boston Logan International Airport used to extend runways to accommodate new, larger
+                planes. The Seaport district was fleshed out, and the landfill at Columbia Point was closed and the
+                area
+                converted to land for housing, parks, and UMass Boston’s Harbor Campus.
+            </p>
         </div>
 
 
@@ -111,6 +274,8 @@
         async defer> </script>
     <script>
         var autocomplete;
+        var shownDiv = null;
+
         function initAutocomplete() {
             autocomplete = new google.maps.places.Autocomplete(document.getElementById("searchBar"));
         }
@@ -122,12 +287,17 @@
             // display result
             let resultText = document.getElementById("resultText");
             let resultDisplay = document.getElementById("resultDisplay");
+            if (shownDiv) {
+                document.getElementById(shownDiv).style.display = "none";
+            }
             if (result.status === "OK") {
-                resultText.innerText = result.data;
-                resultDisplay.style = "display: default";
+                resultText.innerHTML = result.folium_map;
+                $(resultDisplay).show();
+                shownDiv = result.data + "_div";
+                document.getElementById(shownDiv).style.display = "block";
             }
             else {
-                resultText.innerText = "Address not found on map";
+                resultText.innerText = "Address not found on Boston swamp map";
                 resultDisplay.style = "display: default";
             }
         }
@@ -142,8 +312,8 @@
                 dataType: "json"
             });
         }
-        $(document).ready(function() {
-            $("#address_form").submit(function() {
+        $(document).ready(function () {
+            $("#address_form").submit(function () {
                 const coordPromise = postCoordinates();
                 coordPromise.then(handleResponse);
                 return false;
