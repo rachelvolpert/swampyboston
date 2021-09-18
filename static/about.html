@@ -33,6 +33,11 @@
             .bd-placeholder-img-lg {
                 font-size: 3.5rem;
             }
+
+            .result_description {
+                width: 100%;
+                margin-left: 0%;
+            }
         }
 
         body {
@@ -55,6 +60,21 @@
 
         .about_paragraph {
             text-align: left;
+        }
+
+        .image_500 {
+            width: 500px;
+        }
+
+        @media (max-width: 500px) {
+            .result_description {
+                width: 100%;
+                margin-left: 0%;
+            }
+
+            .image_500 {
+                width: 300px;
+            }
         }
     </style>
 </head>
@@ -97,7 +117,7 @@
                 were called “Trimount”, a precursor to the name for Tremont street.
             </p>
             <figure>
-                <img src="/static/boston_1630.jpeg" alt="alt text" style="width: 500px;">
+                <img src="/static/boston_1630.jpeg" alt="alt text" class="image_500">
                 <figcaption>Map of Boston in 1630 <a
                         href="https://collections.leventhalmap.org/search/commonwealth:9s161969s#image">from the Boston
                         Public Library</a></figcaption>
@@ -135,7 +155,7 @@
                 Back Bay was approved.
             </p>
             <figure>
-                <img src="/static/boston_1826.jpeg" alt="alt text" style="width: 500px;">
+                <img src="/static/boston_1826.jpeg" alt="alt text" class="image_500">
                 <figcaption>Map of Boston in 1826, with Back Bay dammed off <a
                         href="https://collections.leventhalmap.org/search/commonwealth:wd376006p">from the Boston
                         Public Library</a></figcaption>
@@ -172,7 +192,7 @@
                 side of the Charles River.
             </p>
             <figure>
-                <img src="/static/boston_1906.jpeg" alt="alt text" style="width: 500px;">
+                <img src="/static/boston_1906.jpeg" alt="alt text" class="image_500">
                 <figcaption>Map of Boston in 1906, with most large areas of swamp filled in <a
                         href="https://collections.leventhalmap.org/search/commonwealth:3f4637252">from the Boston
                         Public Library</a></figcaption>
